@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('book_id');
-            $table->unsignedBigInteger('user_id');
-            $table->integer('rating');
-            $table->text('comments')->nullable();
+            $table->string('title');
+            $table->string('writer');
+            $table->string('publisher');
+            $table->integer('stock');
+            $table->year('year');
+            $table->foreignId('category_id')->on('categories');
+            $table->foreignId('user1_id')->on('user1s');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('books');
     }
-}; 
+};
